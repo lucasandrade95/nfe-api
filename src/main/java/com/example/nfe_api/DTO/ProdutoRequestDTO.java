@@ -1,6 +1,5 @@
 package com.example.nfe_api.DTO;
 
-import com.example.nfe_api.Entitys.NotaFiscal;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
@@ -12,7 +11,5 @@ public class ProdutoRequestDTO {
 
     @Positive
     private double preco;
-
-    private NotaFiscal notaFiscal;
 
 }

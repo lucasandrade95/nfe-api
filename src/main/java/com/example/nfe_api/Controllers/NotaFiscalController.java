@@ -103,13 +103,16 @@ public class NotaFiscalController {
     }
 
     @PutMapping("/produtos/{id}")
-    public ResponseEntity<Produto> updateProduto(@PathVariable Long id, @RequestBody Produto produto) {
+    public ResponseEntity<ProdutoResponseDTO> updateProduto(@PathVariable Long id, @RequestBody ProdutoRequestDTO dto) {
         return produtoRepo.findById(id).map(existing -> {
-            existing.setNome(produto.getNome());
-            existing.setPreco(produto.getPreco());
-            return ResponseEntity.ok(produtoRepo.save(existing));
+            existing.setNome(dto.getNome());
+            existing.setPreco(dto.getPreco());
+
+            Produto atualizado = produtoRepo.save(existing);
+            return ResponseEntity.ok(NotaMapper.toProdutoResponse(atualizado));
         }).orElse(ResponseEntity.notFound().build());
     }
+
 
     @DeleteMapping("/produtos/{id}")
     public ResponseEntity<Void> deleteProduto(@PathVariable Long id) {
