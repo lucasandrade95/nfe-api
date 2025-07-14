@@ -19,6 +19,5 @@ public class Produto {
     private Double preco;
 
     @ManyToOne
-    @JoinColumn(name = "nota_fiscal_id")
     private NotaFiscal notaFiscal;
 }
