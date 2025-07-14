@@ -39,10 +39,25 @@ Esta é uma API RESTful desenvolvida com Spring Boot com foco em autenticação 
 
 ---
 
-## ⚙️ Como Executar
+## H2 Console
 
-1. Clone o repositório:
+1. Url para o banco:
 
 ```bash
-git clone https://github.com/seu-usuario/nfe-api.git
-cd nfe-api
+http://localhost:8080/h2-console
+```
+2. Para acessar o banco de dados:
+
+```bash
+JDBC URL: jdbc:h2:mem:testdb
+User Name: sa
+Password:  (deixe em branco)
+
+```
+## ⚙️ Como Executar
+
+1. Inicie o projeto com o comando:
+
+```bash
+./mvnw spring-boot:run
+

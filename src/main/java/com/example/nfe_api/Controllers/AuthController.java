@@ -1,6 +1,8 @@
 package com.example.nfe_api.Controllers;
 
 import com.example.nfe_api.DTO.LoginDTO;
+import com.example.nfe_api.DTO.LogoutRequestDTO;
+import com.example.nfe_api.DTO.RefreshTokenRequestDTO;
 import com.example.nfe_api.DTO.RegisterDTO;
 import com.example.nfe_api.Entitys.Usuario;
 import com.example.nfe_api.Repositorys.UsuarioRepository;
@@ -44,7 +46,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
         }
 
-        String accessToken = jwtUtil.generateToken(u.getEmail());
+        String accessToken = jwtUtil.generateToken(u);
         String refreshToken = refreshService.createRefreshToken(u);
 
         return ResponseEntity.ok(Map.of(
@@ -54,14 +56,14 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<?> refresh(@RequestBody Map<String, String> req) {
-        String refreshToken = req.get("refreshToken");
+    public ResponseEntity<?> refresh(@RequestBody @Valid RefreshTokenRequestDTO req) {
+        String refreshToken = req.getRefreshToken();
         return ResponseEntity.ok(refreshService.refreshAccessToken(refreshToken));
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(@RequestBody Map<String, String> req) {
-        refreshService.invalidateRefreshToken(req.get("refreshToken"));
+    public ResponseEntity<?> logout(@RequestBody @Valid LogoutRequestDTO req) {
+        refreshService.invalidateRefreshToken(req.getRefreshToken());
         return ResponseEntity.ok("Logout realizado.");
     }
 }
