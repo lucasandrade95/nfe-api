@@ -13,4 +13,6 @@ public class ProdutoRequestDTO {
     @Positive
     private double preco;
 
+    private NotaFiscal notaFiscal;
+
 }

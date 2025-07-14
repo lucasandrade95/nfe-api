@@ -9,13 +9,6 @@ import java.util.stream.Collectors;
 
 public class NotaMapper {
 
-    public static NotaFiscal toEntity(NotaFiscalRequestDTO dto) {
-        NotaFiscal nota = new NotaFiscal();
-        nota.setNumero(dto.getNumero());
-        nota.setEmitente(dto.getEmitente());
-        return nota;
-    }
-
     public static NotaFiscalResponseDTO toResponse(NotaFiscal nota) {
         NotaFiscalResponseDTO dto = new NotaFiscalResponseDTO();
         dto.setId(nota.getId());
